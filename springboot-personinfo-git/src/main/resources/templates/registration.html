@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+</head>
+<body>
+
+	<div data-ng-app="myApp" data-ng-controller="registrationForm">
+		<h1>Welcome To Registration Login Page</h1>
+		<form method="POST">
+			<table align="center">
+				<tr>
+					<td>User Name :</td>
+					<td><input type="text" name="userName"
+						data-ng-model="userName" /></td>
+				</tr>
+
+				<tr>
+					<td>Password :</td>
+					<td><input type="password" name="password"
+						data-ng-model="password" /></td>
+				</tr>
+				<tr>
+					<td>Confirm Password</td>
+					<td><input type="password" name="confirmPassword"
+						data-ng-model="confirmPassword" /></td>
+				</tr>
+				<tr>
+					<td>Company</td>
+					<td><input type="text" name="company" data-ng-model="company" /></td>
+				</tr>
+				<tr>
+					<td>Designation</td>
+					<td><input type="text" name="designation"
+						data-ng-model="designation" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="RegistrationForm"
+						data-ng-click="submitForm()" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('registrationForm', function($scope, $http) {
+
+			$scope.submitForm = function() {
+
+				var data = {
+
+					userName : $scope.userName,
+					password : $scope.password,
+					confirmPassword : $scope.confirmPassword,
+					company : $scope.company,
+					designation : $scope.designation
+				};
+
+				$http.post("http://localhost:8082/registration", data).success(
+						function(response) {
+
+							window.location = "users.html";
+						});
+
+			}
+
+		});
+	</script>
+</body>
+</html>

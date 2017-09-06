@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+</head>
+<body>
+
+
+	<h1>Welcome To login page</h1>
+
+	<div data-ng-app="myApp" data-ng-controller="loginController">
+		<form method="POST">
+			<table align="center">
+				<tr>
+					<td>User Name :</td>
+					<td><input type="text" name="userName" data-ng-model="userName" /></td>
+				</tr>
+				<tr>
+					<td>Password :</td>
+					<td><input type="password" name="password" data-ng-model="password" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Login" data-ng-click="sendData()" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('loginController', function($scope, $http) {
+
+			$scope.sendData = function() {
+				
+				var data = {
+
+					userName : $scope.userName,
+					password : $scope.password
+				};
+
+				 $http.post("http://localhost:8082/welcome", data).success(
+						function(response) {
+							
+							window.location = "users.html";
+						}); 
+
+			}
+
+		});
+	</script>
+
+
+</body>
+</html>

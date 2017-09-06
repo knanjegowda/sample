@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+</head>
+<body>
+
+	<div data-ng-app="myApp" data-ng-controller="registrationForm">
+		<h1>Welcome To Registration Login Page</h1>
+		<form method="POST">
+			<table align="center">
+				<tr>
+					<td>id :</td>
+					<td><input type="text" name=id
+						data-ng-model="id" /></td>
+				</tr>
+				<tr>
+					<td>name :</td>
+					<td><input type="text" name="name"
+						data-ng-model="name" /></td>
+				</tr>				
+				<tr>
+					<td>age</td>
+					<td><input type="text" name=age 
+					data-ng-model="age" /></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td><input type="submit" value="RegistrationForm"
+						data-ng-click="submitForm()" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('registrationForm', function($scope, $http) {
+
+			$scope.submitForm = function() {
+
+				var data = {
+
+					id : $scope.id,
+					name : $scope.name,
+					age : $scope.age
+				};
+
+				$http.post("http://localhost:8082/person", data).success(
+						function(response) {
+
+							window.location = "persondata.html";
+						});
+
+			}
+
+		});
+	</script>
+</body>
+</html>
